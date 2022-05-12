@@ -33,21 +33,23 @@ class ResourceGetUserProfile(DAMCoreResource):
 
 
 class ResourceRegisterUser(DAMCoreResource):
-    @jsonschema.validate(SchemaRegisterUser)
+    #@jsonschema.validate(SchemaRegisterUser)
     def on_post(self, req, resp, *args, **kwargs):
         super(ResourceRegisterUser, self).on_post(req, resp, *args, **kwargs)
 
         aux_user = User()
 
+        print(req.media)
+
         try:
             try:
-                aux_genere = GenereEnum(req.media["genere"].upper())
+                aux_genere = GenereEnum(req.media["gender"].upper())
             except ValueError:
                 raise falcon.HTTPBadRequest(description=messages.genere_invalid)
 
 
             aux_user.username = req.media["username"]
-            aux_user.password = req.media["password"]
+            aux_user.set_password(req.media["password"])
             aux_user.email = req.media["email"]
             aux_user.name = req.media["name"]
             aux_user.surname = req.media["surname"]

@@ -81,7 +81,7 @@ class User(SQLAlchemyBase, JSONModel):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
-    created_at = Column(DateTime, default=datetime.datetime.now, nullable=False)
+    created_at = Column(DateTime, default=datetime.datetime.now, nullable=True)
     username = Column(Unicode(50), nullable=False, unique=True)
     password = Column(UnicodeText, nullable=False)
     email = Column(Unicode(255), nullable=False)
@@ -89,7 +89,7 @@ class User(SQLAlchemyBase, JSONModel):
     name = Column(Unicode(50), nullable=False)
     surname = Column(Unicode(50), nullable=False)
     birthdate = Column(Date)
-    genere = Column(Enum(GenereEnum), nullable=False)
+    genere = Column(Enum(GenereEnum), nullable=True)
     phone = Column(Unicode(50))
     photo = Column(Unicode(255))
 
